@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class SquareTest {
     @Test
@@ -12,6 +13,17 @@ class SquareTest {
 
         assertThat(b6.getX()).isEqualTo(2);
         assertThat(b6.getY()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldGetSquareForValidSquares() {
+        for (char letter = 'a'; letter <= 'h'; letter++) {
+            for (int i = 1; i <= 8; i++) {
+                final String squareLabel = String.valueOf(letter) + i;
+                final Square square = Square.get(squareLabel);
+                assertNotNull(square);
+            }
+        }
     }
 
     @Test
