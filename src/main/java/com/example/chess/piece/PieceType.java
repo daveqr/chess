@@ -5,18 +5,18 @@ public enum PieceType {
             "Knight");
 
     private final String symbol;
-    private final String customName;
+    private final String label;
 
-    PieceType(String symbol, String customName) {
+    PieceType(final String symbol, final String label) {
         this.symbol = symbol;
-        this.customName = customName;
+        this.label = label;
     }
 
     public String getSymbol() {
         return symbol;
     }
 
-    public String getName() {
-        return customName;
+    public String getLabel() {
+        return label;
     }
 }
