@@ -1,6 +1,6 @@
 package com.ebonyandirony.chess.square;
 
-import com.ebonyandirony.chess.Board;
+import com.ebonyandirony.chess.board.Board;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

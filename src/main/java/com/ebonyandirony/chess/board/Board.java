@@ -1,4 +1,4 @@
-package com.ebonyandirony.chess;
+package com.ebonyandirony.chess.board;
 
 public class Board {
     public static final char FILE_LOWER_BOUND = 'a';
@@ -7,6 +7,8 @@ public class Board {
     public static final int RANK_UPPER_BOUND = 8;
 
     // @formatter:off
+
+    private String chessboard = "";
 
     // white is vertically on left, black is on right
 //    private static final String[][] CHESSBOARD = {
@@ -22,4 +24,11 @@ public class Board {
 
     // @formatter:on
 
+    public Board() {
+
+    }
+
+    public String getChessboard() {
+        return chessboard;
+    }
 }
