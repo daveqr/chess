@@ -9,7 +9,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class TargetTest {
 
     @Test
-    public void shouldCreateAQueen() {
+    public void shouldCreateAQueenCheckmateTarget() {
+        Target target = new Target("Qh8#");
+        assertThat(target.getType()).isEqualTo(PieceType.QUEEN);
+        assertThat(target.getTarget()).isEqualTo("Qh8#");
+    }
+
+    @Test
+    public void shouldCreateAQueenTarget() {
         Target target = new Target("Qd5");
         assertThat(target.getType()).isEqualTo(PieceType.QUEEN);
         assertThat(target.getTarget()).isEqualTo("Qd5");
@@ -38,42 +45,42 @@ class TargetTest {
     }
 
     @Test
-    public void shouldCreateAQueenCapture() {
+    public void shouldCreateAQueenCaptureTarget() {
         Target target = new Target("Qxe5");
         assertThat(target.getType()).isEqualTo(PieceType.QUEEN);
         assertThat(target.getTarget()).isEqualTo("Qxe5");
     }
 
     @Test
-    public void shouldCreateAPawn() {
+    public void shouldCreateAPawnTarget() {
         Target target = new Target("a4");
         assertThat(target.getType()).isEqualTo(PieceType.PAWN);
         assertThat(target.getTarget()).isEqualTo("a4");
     }
 
     @Test
-    public void shouldCreateAPawnAtWhiteUpperBound() {
+    public void shouldCreateAPawnTargetAtWhiteUpperBound() {
         Target target = new Target("a8");
         assertThat(target.getType()).isEqualTo(PieceType.PAWN);
         assertThat(target.getTarget()).isEqualTo("a8");
     }
 
     @Test
-    public void shouldCreateAPawnAtWhiteLowerBound() {
+    public void shouldCreateAPawnTargetAtWhiteLowerBound() {
         Target target = new Target("a2");
         assertThat(target.getType()).isEqualTo(PieceType.PAWN);
         assertThat(target.getTarget()).isEqualTo("a2");
     }
 
     @Test
-    public void shouldCreateAPawnAtBlackUpperBound() {
+    public void shouldCreateAPawnTargetAtBlackUpperBound() {
         Target target = new Target("a1");
         assertThat(target.getType()).isEqualTo(PieceType.PAWN);
         assertThat(target.getTarget()).isEqualTo("a1");
     }
 
     @Test
-    public void shouldCreateAPawnAtBlackLowerBound() {
+    public void shouldCreateAPawnTargetAtBlackLowerBound() {
         Target target = new Target("a7");
         assertThat(target.getType()).isEqualTo(PieceType.PAWN);
         assertThat(target.getTarget()).isEqualTo("a7");
