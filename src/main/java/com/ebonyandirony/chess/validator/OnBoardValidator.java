@@ -1,4 +1,4 @@
-package com.example.chess.validator;
+package com.ebonyandirony.chess.validator;
 
 public class OnBoardValidator implements MoveValidator {
 

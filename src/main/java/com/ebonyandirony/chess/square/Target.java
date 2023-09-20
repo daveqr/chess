@@ -1,15 +1,12 @@
-package com.example.chess;
+package com.ebonyandirony.chess.square;
 
-import com.example.chess.piece.PieceType;
+import com.ebonyandirony.chess.Board;
+import com.ebonyandirony.chess.piece.PieceType;
 
 import java.util.HashMap;
 import java.util.Map;
 
 interface TargetDestinationValidator {
-    char FILE_LOWER_BOUND = 'a';
-    char FILE_UPPER_BOUND = 'h';
-    char RANK_LOWER_BOUND = '1';
-    char RANK_UPPER_BOUND = '8';
 
     boolean isValidTarget(final char[] target);
 }
@@ -18,14 +15,14 @@ class PawnTargetValidator implements TargetDestinationValidator {
     @Override
     public boolean isValidTarget(final char[] target) {
         final char pieceSymbol = target[0];
-        final char endRank = target[target.length - 1];
+        final int endRank = Character.getNumericValue(target[target.length - 1]);
         boolean isCapture = target.length == 3 && target[1] == Target.CAPTURE_MODIFIER;
 
         // @formatter:off
-        return pieceSymbol >= FILE_LOWER_BOUND &&
-               pieceSymbol <= FILE_UPPER_BOUND &&
-               endRank >= RANK_LOWER_BOUND &&
-               endRank <= RANK_UPPER_BOUND &&
+        return pieceSymbol >= Board.FILE_LOWER_BOUND &&
+               pieceSymbol <= Board.FILE_UPPER_BOUND &&
+               endRank >= Board.RANK_LOWER_BOUND &&
+               endRank <= Board.RANK_UPPER_BOUND &&
                (target.length == 2 || isCapture);
         // @formatter:on
     }
@@ -39,10 +36,13 @@ class QueenTargetValidator implements TargetDestinationValidator {
                 .replace(Character.toString(Target.CHECKMATE_MODIFIER), "")
                 .toCharArray();
 
-        return  cleanedMove[cleanedMove.length - 2] >= FILE_LOWER_BOUND &&
-                cleanedMove[cleanedMove.length - 2] <= FILE_UPPER_BOUND &&
-                cleanedMove[cleanedMove.length - 1] >= RANK_LOWER_BOUND &&
-                cleanedMove[cleanedMove.length - 1] <= RANK_UPPER_BOUND;
+        final int rank = Character.getNumericValue(cleanedMove[cleanedMove.length - 1]);
+        final char file = cleanedMove[cleanedMove.length - 2];
+
+        return  file >= Board.FILE_LOWER_BOUND &&
+                file <= Board.FILE_UPPER_BOUND &&
+                rank >= Board.RANK_LOWER_BOUND &&
+                rank <= Board.RANK_UPPER_BOUND;
         // @formatter:on
     }
 

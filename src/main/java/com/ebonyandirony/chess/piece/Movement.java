@@ -1,4 +1,4 @@
-package com.example.chess.piece;
+package com.ebonyandirony.chess.piece;
 
 public record Movement(MovementDirection type, Direction direction, int number) {
     public static final Movement DIAGONAL_ALL = new Movement(MovementDirection.DIAGONAL, Direction.ANY, Integer.MAX_VALUE);

@@ -1,4 +1,4 @@
-package com.example.chess.piece;
+package com.ebonyandirony.chess.piece;
 
 public enum PieceType {
     PAWN("p", "pawn", '♙', '♟'), KING("K", "King", '♔', '♚'), QUEEN("Q", "Queen", '♕', '♛'), BISHOP("B", "Bishop", '♗',

@@ -1,4 +1,4 @@
-package com.example.chess.piece;
+package com.ebonyandirony.chess.piece;
 
 import java.util.Set;
 

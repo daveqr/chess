@@ -1,15 +1,15 @@
-package com.example.chess.piece;
+package com.ebonyandirony.chess.piece;
 
 import java.util.Set;
 
-import static com.example.chess.piece.Movement.DIAGONAL_ALL;
-import static com.example.chess.piece.Movement.DIAGONAL_ANY_ONE;
-import static com.example.chess.piece.Movement.HORIZONTAL_ALL;
-import static com.example.chess.piece.Movement.HORIZONTAL_ANY_ONE;
-import static com.example.chess.piece.Movement.L_SHAPED;
-import static com.example.chess.piece.Movement.VERTICAL_ALL;
-import static com.example.chess.piece.Movement.VERTICAL_ANY_ONE;
-import static com.example.chess.piece.Movement.VERTICAL_FORWARD_ONE;
+import static com.ebonyandirony.chess.piece.Movement.DIAGONAL_ALL;
+import static com.ebonyandirony.chess.piece.Movement.DIAGONAL_ANY_ONE;
+import static com.ebonyandirony.chess.piece.Movement.HORIZONTAL_ALL;
+import static com.ebonyandirony.chess.piece.Movement.HORIZONTAL_ANY_ONE;
+import static com.ebonyandirony.chess.piece.Movement.L_SHAPED;
+import static com.ebonyandirony.chess.piece.Movement.VERTICAL_ALL;
+import static com.ebonyandirony.chess.piece.Movement.VERTICAL_ANY_ONE;
+import static com.ebonyandirony.chess.piece.Movement.VERTICAL_FORWARD_ONE;
 
 enum Capture {
     DIAGONAL, ANY_VALID
