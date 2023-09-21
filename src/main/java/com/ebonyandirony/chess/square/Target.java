@@ -15,7 +15,7 @@ class PawnTargetValidator implements TargetDestinationValidator {
     @Override
     public boolean isValidTarget(final char[] target) {
         final char pieceSymbol = target[0];
-        final int endRank = Character.getNumericValue(target[target.length - 1]);
+        final char endRank = target[target.length - 1];
         boolean isCapture = target.length == 3 && target[1] == Target.CAPTURE_MODIFIER;
 
         // @formatter:off
@@ -36,7 +36,7 @@ class QueenTargetValidator implements TargetDestinationValidator {
                 .replace(Character.toString(Target.CHECKMATE_MODIFIER), "")
                 .toCharArray();
 
-        final int rank = Character.getNumericValue(cleanedMove[cleanedMove.length - 1]);
+        final int rank = cleanedMove[cleanedMove.length - 1];
         final char file = cleanedMove[cleanedMove.length - 2];
 
         return  file >= Board.FILE_LOWER_BOUND &&

@@ -22,14 +22,14 @@ public class SquareAddress {
         }
 
         final char fileChar = square.charAt(0);
-        final int rankInt = Character.getNumericValue(square.charAt(1));
+        final int rankChar = square.charAt(1);
 
         final boolean isValidFile = (fileChar >= Board.FILE_LOWER_BOUND && fileChar <= Board.FILE_UPPER_BOUND);
-        final boolean isValidRank = (rankInt >= Board.RANK_LOWER_BOUND && rankInt <= Board.RANK_UPPER_BOUND);
+        final boolean isValidRank = (rankChar >= Board.RANK_LOWER_BOUND && rankChar <= Board.RANK_UPPER_BOUND);
 
         if (isValidFile && isValidRank) {
-            final int file = Math.abs('a' - fileChar);
-            final int rank = rankInt - 1;
+            final int file = fileChar - Board.FILE_LOWER_BOUND;
+            final int rank = rankChar - Board.RANK_LOWER_BOUND;
             return new SquareAddress(square, file, rank);
         }
 

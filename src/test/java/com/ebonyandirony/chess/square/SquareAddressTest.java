@@ -30,7 +30,7 @@ class SquareAddressTest {
     @Test
     public void shouldGetSquareForValidSquares() {
         for (char letter = Board.FILE_LOWER_BOUND; letter <= Board.FILE_UPPER_BOUND; letter++) {
-            for (int i = Board.RANK_LOWER_BOUND; i <= Board.RANK_UPPER_BOUND; i++) {
+            for (char i = Board.RANK_LOWER_BOUND; i <= Board.RANK_UPPER_BOUND; i++) {
                 final String squareLabel = String.valueOf(letter) + i;
                 final SquareAddress square = SquareAddress.fromString(squareLabel);
                 assertNotNull(square);
