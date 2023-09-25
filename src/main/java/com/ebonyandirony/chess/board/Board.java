@@ -43,38 +43,42 @@ public class Board {
     Board() {
     }
 
-    public boolean isPathBlocked(String sourceSquare, String destinationSquare) {
-        long occupancy = allPieces();
+//    public boolean isPathBlocked(String sourceSquare, String destinationSquare) {
+//        long occupancy = allPieces();
+//
+//        // 0b00000000_00000000_00000000_00000000_00000000_00000000_00001000_00000000L
+//        long sourceBit = BITBOARDS.get(sourceSquare);
+//        long destinationBit = BITBOARDS.get(destinationSquare);
+//
+//        // e2: 7 is 'e' - 'a', 4 is '1' - '1', and 2 is 2
+//        int squareIndex = 7 - 4 + (2 * 8);
+//        long fileMask = 0x0101010101010101L << squareIndex % 8;
+//        long rankMask = 0xFFL << (8 * (squareIndex / 8));
+////        Long.numberOfTrailingZeros()
+//
+//        return false;
+//    }
 
-        // 0b00000000_00000000_00000000_00000000_00000000_00000000_00001000_00000000L
-        long sourceBit = BITBOARDS.get(sourceSquare);
-        long destinationBit = BITBOARDS.get(destinationSquare);
+//    private long generateSquaresBetween(long sourceBit, long destinationBit) {
+//        long fileMask = (1L << Long.numberOfTrailingZeros(sourceBit % 256)) - 1L;
+//        long rankMask = (1L << (Long.numberOfTrailingZeros(sourceBit / 256))) - 1L;
+//        return (fileMask & rankMask) & (sourceBit ^ destinationBit);
+//    }
 
-        // e2: 7 is 'e' - 'a', 4 is '1' - '1', and 2 is 2
-        int squareIndex = 7 - 4 + (2 * 8);
-        long fileMask = 0x0101010101010101L << squareIndex % 8;
-        long rankMask = 0xFFL << (8 * (squareIndex / 8));
-//        Long.numberOfTrailingZeros()
-
-        return false;
+    long allPieces() {
+        return allWhitePieces() | allBlackPieces();
     }
 
-    private long generateSquaresBetween(long sourceBit, long destinationBit) {
-        long fileMask = (1L << Long.numberOfTrailingZeros(sourceBit % 256)) - 1L;
-        long rankMask = (1L << (Long.numberOfTrailingZeros(sourceBit / 256))) - 1L;
-        return (fileMask & rankMask) & (sourceBit ^ destinationBit);
-    }
-
-    private long allPieces() {
-        long allWhitePieces = BITBOARDS.get("whitePawns") | BITBOARDS.get("whiteRooks")
+    long allWhitePieces() {
+        return BITBOARDS.get("whitePawns") | BITBOARDS.get("whiteRooks")
                 | BITBOARDS.get("whiteKnights") | BITBOARDS.get("whiteBishops")
                 | BITBOARDS.get("whiteQueen") | BITBOARDS.get("whiteKing");
+    }
 
-        long allBlackPieces = BITBOARDS.get("blackPawns") | BITBOARDS.get("blackRooks")
+    long allBlackPieces() {
+        return BITBOARDS.get("blackPawns") | BITBOARDS.get("blackRooks")
                 | BITBOARDS.get("blackKnights") | BITBOARDS.get("blackBishops")
                 | BITBOARDS.get("blackQueen") | BITBOARDS.get("blackKing");
-
-        return allWhitePieces | allBlackPieces;
     }
 
     private static Stream<String> generateAllSquares() {

@@ -140,7 +140,25 @@ class BoardTest {
     }
 
     @Test
-    public void shouldAllowPawnMove() {
-        Board board = new Board();
+    public void shouldCreateAllWhitePieces() {
+        long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_11111111_11111111L;
+        assertThat(BoardFactory.create().allWhitePieces()).isEqualTo(expected);
     }
+
+    @Test
+    public void shouldCreateAllBlackPieces() {
+        long expected = 0b11111111_11111111_00000000_00000000_00000000_00000000_00000000_00000000L;
+        assertThat(BoardFactory.create().allBlackPieces()).isEqualTo(expected);
+    }
+
+    @Test
+    public void shouldCreateAllPieces() {
+        long expected = 0b11111111_11111111_00000000_00000000_00000000_00000000_11111111_11111111L;
+        assertThat(BoardFactory.create().allPieces()).isEqualTo(expected);
+    }
+
+//    @Test
+//    public void shouldAllowPawnMove() {
+//        Board board = new Board();
+//    }
 }

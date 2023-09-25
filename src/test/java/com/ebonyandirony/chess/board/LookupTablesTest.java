@@ -103,6 +103,12 @@ public class LookupTablesTest {
     }
 
     @Test
+    public void shouldClearFileA() {
+        long expected = 0b11111110_11111110_11111110_11111110_11111110_11111110_11111110_11111110L;
+        assertThat(LookupTables.CLEAR_FILE_A).isEqualTo(expected);
+    }
+
+    @Test
     public void shouldClearFileB() {
         long expected = 0b11111101_11111101_11111101_11111101_11111101_11111101_11111101_11111101L;
         assertThat(LookupTables.CLEAR_FILE_B).isEqualTo(expected);
