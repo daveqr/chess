@@ -42,20 +42,20 @@ class BoardTest {
     @ParameterizedTest
     @MethodSource("bitboardTestData")
     public void shouldHaveABitboardsForAllSquares(String squareName, long expectedBitboard) {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
 
         assertThat(bitboards.get(squareName)).isEqualTo(expectedBitboard);
     }
 
     @Test
     public void shouldCreate76Bitboards() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
         assertThat(bitboards.size()).isEqualTo(76);
     }
 
     @Test
     public void shouldCreateWhitePawnBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
 
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_11111111_00000000L;
         assertThat(bitboards.get("whitePawns")).isEqualTo(expected);
@@ -63,42 +63,42 @@ class BoardTest {
 
     @Test
     public void shouldCreateWhiteRookBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_10000001L;
         assertThat(bitboards.get("whiteRooks")).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateWhiteKnightBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_01000010L;
         assertThat(bitboards.get("whiteKnights")).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateWhiteBishopBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00100100L;
         assertThat(bitboards.get("whiteBishops")).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateWhiteQueenBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
-        long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00010000L;
+        Map<String, Long> bitboards = Board.BITBOARDS;
+        long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00001000L;
         assertThat(bitboards.get("whiteQueen")).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateWhiteKingBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
-        long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00001000L;
+        Map<String, Long> bitboards = Board.BITBOARDS;
+        long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00010000L;
         assertThat(bitboards.get("whiteKing")).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackPawnBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
 
         long expected = 0b00000000_11111111_00000000_00000000_00000000_00000000_00000000_00000000L;
         assertThat(bitboards.get("blackPawns")).isEqualTo(expected);
@@ -106,36 +106,41 @@ class BoardTest {
 
     @Test
     public void shouldCreateBlackRookBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
         long expected = 0b10000001_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
         assertThat(bitboards.get("blackRooks")).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackKnightBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
         long expected = 0b01000010_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
         assertThat(bitboards.get("blackKnights")).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackBishopBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
         long expected = 0b00100100_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
         assertThat(bitboards.get("blackBishops")).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackQueenBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
         long expected = 0b00010000_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
         assertThat(bitboards.get("blackQueen")).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackKingBitboard() {
-        Map<String, Long> bitboards = new Board().getBitboards();
+        Map<String, Long> bitboards = Board.BITBOARDS;
         long expected = 0b00001000_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
         assertThat(bitboards.get("blackKing")).isEqualTo(expected);
+    }
+
+    @Test
+    public void shouldAllowPawnMove() {
+        Board board = new Board();
     }
 }
