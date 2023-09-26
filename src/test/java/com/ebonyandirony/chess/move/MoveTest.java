@@ -12,15 +12,20 @@ class MoveTest {
     @Test
     public void shouldCreateAQueenCheckmateTarget() {
         Move move = new Move("Qh8#");
-        AssertionsForClassTypes.assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
+        assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
         assertThat(move.getMove()).isEqualTo("Qh8#");
+        assertThat(move.getFile()).isEqualTo('h');
+        assertThat(move.getRank()).isEqualTo('8');
+
     }
 
     @Test
     public void shouldCreateAQueenTarget() {
         Move move = new Move("Qd5");
-        AssertionsForClassTypes.assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
+        assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
         assertThat(move.getMove()).isEqualTo("Qd5");
+        assertThat(move.getFile()).isEqualTo('d');
+        assertThat(move.getRank()).isEqualTo('5');
     }
 
     @Test
@@ -48,50 +53,64 @@ class MoveTest {
     @Test
     public void shouldCreateAQueenCaptureTarget() {
         Move move = new Move("Qxe5");
-        AssertionsForClassTypes.assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
+        assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
         assertThat(move.getMove()).isEqualTo("Qxe5");
+        assertThat(move.getFile()).isEqualTo('e');
+        assertThat(move.getRank()).isEqualTo('5');
     }
 
     @Test
     public void shouldCreateAPawnTarget() {
         Move move = new Move("a4");
-        AssertionsForClassTypes.assertThat(move.getType()).isEqualTo(PieceType.PAWN);
+        assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a4");
+        assertThat(move.getFile()).isEqualTo('a');
+        assertThat(move.getRank()).isEqualTo('4');
     }
 
     @Test
     public void shouldCreateAPawnTargetAtWhiteUpperBound() {
         Move move = new Move("a8");
-        AssertionsForClassTypes.assertThat(move.getType()).isEqualTo(PieceType.PAWN);
+        assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a8");
+        assertThat(move.getFile()).isEqualTo('a');
+        assertThat(move.getRank()).isEqualTo('8');
     }
 
     @Test
     public void shouldCreateAPawnTargetAtWhiteLowerBound() {
         Move move = new Move("a2");
-        AssertionsForClassTypes.assertThat(move.getType()).isEqualTo(PieceType.PAWN);
+        assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a2");
+        assertThat(move.getFile()).isEqualTo('a');
+        assertThat(move.getRank()).isEqualTo('2');
     }
 
     @Test
     public void shouldCreateAPawnTargetAtBlackUpperBound() {
         Move move = new Move("a1");
-        AssertionsForClassTypes.assertThat(move.getType()).isEqualTo(PieceType.PAWN);
+        assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a1");
+        assertThat(move.getFile()).isEqualTo('a');
+        assertThat(move.getRank()).isEqualTo('1');
     }
 
     @Test
     public void shouldCreateAPawnTargetAtBlackLowerBound() {
         Move move = new Move("a7");
-        AssertionsForClassTypes.assertThat(move.getType()).isEqualTo(PieceType.PAWN);
+        assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a7");
+        assertThat(move.getFile()).isEqualTo('a');
+        assertThat(move.getRank()).isEqualTo('7');
     }
 
     @Test
     public void shouldCreateAPawnCaptureTarget() {
-        Move move = new Move("ex6");
-        AssertionsForClassTypes.assertThat(move.getType()).isEqualTo(PieceType.PAWN);
-        assertThat(move.getMove()).isEqualTo("ex6");
+        Move move = new Move("exd5");
+        assertThat(move.getType()).isEqualTo(PieceType.PAWN);
+        assertThat(move.getMove()).isEqualTo("exd5");
+        assertThat(move.getFile()).isEqualTo('d');
+        assertThat(move.getRank()).isEqualTo('5');
     }
 
     @Test

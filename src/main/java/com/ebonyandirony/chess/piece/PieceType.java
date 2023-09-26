@@ -1,6 +1,11 @@
 package com.ebonyandirony.chess.piece;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public enum PieceType {
+
+
     PAWN('p' , "pawn", '♙' , '♟'),
     KING('K' , "King", '♔' , '♚'),
     QUEEN('Q' , "Queen", '♕' , '♛'),
@@ -8,6 +13,7 @@ public enum PieceType {
             '♝'),
     ROOK('R' , "Rook", '♖' , '♜'),
     KNIGHT('N' , "Knight", '♘' , '♞');
+
 
     private final char symbol;
     private final String label;
@@ -28,6 +34,20 @@ public enum PieceType {
 
     public String getLabel() {
         return label;
+    }
+
+    private static final Set<PieceType> NAMED_PIECES = new HashSet<>();
+
+    static {
+        NAMED_PIECES.add(BISHOP);
+        NAMED_PIECES.add(ROOK);
+        NAMED_PIECES.add(KNIGHT);
+        NAMED_PIECES.add(QUEEN);
+        NAMED_PIECES.add(KING);
+    }
+
+    public static Set<PieceType> getNamedPieces() {
+        return NAMED_PIECES;
     }
 
     public char getWhiteAsciiCharacter() {
