@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 import static com.ebonyandirony.chess.piece.PieceType.*;
 
 public class Move {
-    static final char CAPTURE_MODIFIER = 'x';
-
-    static final char CHECKMATE_MODIFIER = '#';
-
     private final PieceType type;
     private final String move;
+
+    private final char file;
+
+    private final char rank;
 
     private static final EnumMap<PieceType, MoveVerifier> VERIFIERS = new EnumMap<>(PieceType.class);
 
@@ -23,12 +23,8 @@ public class Move {
     static {
         VERIFIERS.put(PAWN, new PawnMoveVerifier());
         VERIFIERS.put(QUEEN, new QueenMoveVerifier());
+        VERIFIERS.put(KING, new KingMoveVerifier());
     }
-
-    private final char rank;
-
-    private final char file;
-
 
     public Move(final String move) {
         assertMove(move);
@@ -42,6 +38,11 @@ public class Move {
             this.file = findFile(move);
         } else if (symbol == QUEEN.getSymbol() && verify(move, QUEEN)) {
             this.type = QUEEN;
+            this.move = move;
+            this.rank = findRank(move);
+            this.file = findFile(move);
+        } else if (symbol == KING.getSymbol() && verify(move, KING)) {
+            this.type = KING;
             this.move = move;
             this.rank = findRank(move);
             this.file = findFile(move);
@@ -99,20 +100,20 @@ public class Move {
     private char findRankOrFile(String move, boolean isRank) {
         char firstChar = move.charAt(0);
 
-        if (isPawnMove(firstChar, move)) {
+        if (isPawnMove(firstChar)) {
             return extractFileOrRankForPawnMove(move, isRank);
-        } else if (isNamedPieceMove(firstChar, move)) {
+        } else if (isNamedPieceMove(firstChar)) {
             return extractFileOrRankForNamedPieceMove(move, isRank);
         } else {
             throw new IllegalArgumentException("Invalid file in move: " + move);
         }
     }
 
-    private boolean isPawnMove(char firstChar, String move) {
+    private boolean isPawnMove(char firstChar) {
         return firstChar >= Board.FILE_LOWER_BOUND && firstChar <= Board.FILE_UPPER_BOUND;
     }
 
-    private boolean isNamedPieceMove(char firstChar, String move) {
+    private boolean isNamedPieceMove(char firstChar) {
         Set<Character> namedPieceSymbols = PieceType.getNamedPieces().stream()
                 .map(PieceType::getSymbol)
                 .collect(Collectors.toSet());

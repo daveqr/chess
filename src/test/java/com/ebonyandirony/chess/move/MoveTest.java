@@ -166,4 +166,44 @@ class MoveTest {
             new Move(" ");
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Move cannot be empty.");
     }
+
+    @Test
+    public void shouldCreateAKingMove() {
+        Move move = new Move("Kf1");
+        assertThat(move.getType()).isEqualTo(PieceType.KING);
+        assertThat(move.getMove()).isEqualTo("Kf1");
+        assertThat(move.getFile()).isEqualTo('f');
+        assertThat(move.getRank()).isEqualTo('1');
+    }
+
+    @Test
+    public void shouldThrowExceptionForInvalidFile() {
+        String target = "Ka0";
+
+        assertThatThrownBy(() -> {
+            new Move(target);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid King move: " + target);
+
+        assertThatThrownBy(() -> {
+            new Move("Ka9");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid King move: Ka9");
+    }
+
+    @Test
+    public void shouldThrowExceptionForInvalidRank() {
+        String target = "Ki1";
+
+        assertThatThrownBy(() -> {
+            new Move(target);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid King move: " + target);
+    }
+
+    @Test
+    public void shouldCreateAKingCaptureMove() {
+        Move move = new Move("Kxf1");
+        assertThat(move.getType()).isEqualTo(PieceType.KING);
+        assertThat(move.getMove()).isEqualTo("Kxf1");
+        assertThat(move.getFile()).isEqualTo('f');
+        assertThat(move.getRank()).isEqualTo('1');
+    }
 }
