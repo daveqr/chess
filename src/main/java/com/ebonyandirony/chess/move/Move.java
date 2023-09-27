@@ -2,9 +2,9 @@ package com.ebonyandirony.chess.move;
 
 import com.ebonyandirony.chess.move.verify.AlgebraicNotationVerifier;
 import com.ebonyandirony.chess.move.verify.NotationVerifier;
+import com.ebonyandirony.chess.piece.Color;
 import com.ebonyandirony.chess.piece.PieceType;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,28 +18,31 @@ public class Move {
 
     private final PieceType type;
 
-    private final String square;
+    private final String target;
 
     private final char file;
 
     private final char rank;
 
-    private Move(String square) {
-        assertMove(square);
-        verify(square);
+    private final Color color;
 
-        this.square = square;
-        this.rank = findRank(square);
-        this.file = findFile(square);
+    private Move(String target, Color color) {
+        assertMove(target);
+        verify(target);
 
-        final char symbol = square.charAt(0);
+        this.target = target;
+        this.rank = findRank(target);
+        this.file = findFile(target);
+        this.color = color;
+
+        final char symbol = target.charAt(0);
         final boolean isPawn = Character.isLowerCase(symbol) && symbol >= 'a' && symbol <= 'h';
 
         this.type = isPawn ? PAWN : PieceType.fromSymbol(symbol);
     }
 
-    public static Move create(final String move) {
-        return new Move(move);
+    public static Move create(final String move, final Color color) {
+        return new Move(move, color);
     }
 
     private void assertMove(final String target) {
@@ -62,8 +65,8 @@ public class Move {
         return type;
     }
 
-    public String getSquare() {
-        return square;
+    public String getTarget() {
+        return target;
     }
 
     public int getRank() {
@@ -72,6 +75,10 @@ public class Move {
 
     public int getFile() {
         return file;
+    }
+
+    public boolean isWhiteMove() {
+        return color == Color.WHITE;
     }
 
     private char findRank(String move) {
@@ -130,7 +137,7 @@ public class Move {
     @Override
     public String toString() {
         return "Move{" +
-                "square='" + square + '\'' +
+                "square='" + target + '\'' +
                 '}';
     }
 }

@@ -9,10 +9,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static com.ebonyandirony.chess.piece.Color.WHITE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class KingMoveRuleTest {
     private static final long WHITE_KING_AT_D4 = 0b00000000_00000000_00000000_00000000_00001000_00000000_00000000_00000000L;
+
     private static final long WHITE_KING_AT_B1 = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00000010L;
 
     private static final String[] KING_MOVES = {
@@ -33,32 +35,43 @@ class KingMoveRuleTest {
 
     @ParameterizedTest
     @MethodSource("kingMovesProvider")
-    public void shouldAllowKingToMoveLeftWhenUnoccupied(final String move) {
+    public void shouldAllowKingToMoveWhenTargetUnoccupied(final String target) {
         final Board board = Board.create();
         board.setWhiteKingBoard(WHITE_KING_AT_D4);
 
-        final KingMoveRule rule = new KingMoveRule(board, Move.create(move));
+        final KingMoveRule rule = new KingMoveRule(board, Move.create(target, WHITE));
 
-        assertThat(rule.isLegalMove()).isTrue();
+        assertThat(rule.isLegalMove()).as("Move is legal: d4 to " + target).isTrue();
     }
 
     @ParameterizedTest
     @MethodSource("occupiedKingMovesProvider")
-    public void shouldDisallowKingToMoveLeftWhenOccupied(final String move) {
+    public void shouldDisallowKingToMoveWhenTargetOccupied(final String move) {
         final Board board = Board.create();
         board.setWhiteKingBoard(WHITE_KING_AT_B1);
 
-        final KingMoveRule rule = new KingMoveRule(board, Move.create(move));
+        final KingMoveRule rule = new KingMoveRule(board, Move.create(move, WHITE));
 
         assertThat(rule.isLegalMove()).isFalse();
     }
 
     @Test
-    public void shouldDisallowKingToMoveLeftWhenMoreThanOne() {
+    public void shouldDisallowKingToMoveUpWhenMoreThanOne() {
         final Board board = Board.create();
         board.setWhiteKingBoard(WHITE_KING_AT_D4);
 
-        final Move move = Move.create("Ka4");
+        final Move move = Move.create("Kd7", WHITE);
+        final KingMoveRule rule = new KingMoveRule(board, move);
+
+        assertThat(rule.isLegalMove()).isFalse();
+    }
+
+    @Test
+    public void shouldDisallowKingToMoveDownWhenMoreThanOne() {
+        final Board board = Board.create();
+        board.setWhiteKingBoard(WHITE_KING_AT_D4);
+
+        final Move move = Move.create("Kd1", WHITE);
         final KingMoveRule rule = new KingMoveRule(board, move);
 
         assertThat(rule.isLegalMove()).isFalse();
