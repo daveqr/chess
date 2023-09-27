@@ -8,7 +8,7 @@ class BoardFactoryTest {
 
     @Test
     public void shouldCreateANewBoard() {
-        final Board board = BoardFactory.create();
+        final Board board = Board.create();
 
         assertNotNull(board);
     }

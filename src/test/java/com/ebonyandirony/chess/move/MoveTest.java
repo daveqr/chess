@@ -1,7 +1,6 @@
 package com.ebonyandirony.chess.move;
 
 import com.ebonyandirony.chess.piece.PieceType;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -13,7 +12,7 @@ class MoveTest {
     public void shouldCreateAQueenCheckmateTarget() {
         Move move = Move.create("Qh8#");
         assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
-        assertThat(move.getMove()).isEqualTo("Qh8#");
+        assertThat(move.getSquare()).isEqualTo("Qh8#");
         assertThat(move.getFile()).isEqualTo('h');
         assertThat(move.getRank()).isEqualTo('8');
 
@@ -23,7 +22,7 @@ class MoveTest {
     public void shouldCreateAQueenTarget() {
         Move move = Move.create("Qd5");
         assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
-        assertThat(move.getMove()).isEqualTo("Qd5");
+        assertThat(move.getSquare()).isEqualTo("Qd5");
         assertThat(move.getFile()).isEqualTo('d');
         assertThat(move.getRank()).isEqualTo('5');
     }
@@ -54,7 +53,7 @@ class MoveTest {
     public void shouldCreateAQueenCaptureTarget() {
         Move move = Move.create("Qxe5");
         assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
-        assertThat(move.getMove()).isEqualTo("Qxe5");
+        assertThat(move.getSquare()).isEqualTo("Qxe5");
         assertThat(move.getFile()).isEqualTo('e');
         assertThat(move.getRank()).isEqualTo('5');
     }
@@ -63,7 +62,7 @@ class MoveTest {
     public void shouldCreateAPawnTarget() {
         Move move = Move.create("a4");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
-        assertThat(move.getMove()).isEqualTo("a4");
+        assertThat(move.getSquare()).isEqualTo("a4");
         assertThat(move.getFile()).isEqualTo('a');
         assertThat(move.getRank()).isEqualTo('4');
     }
@@ -72,7 +71,7 @@ class MoveTest {
     public void shouldCreateAPawnTargetAtWhiteUpperBound() {
         Move move = Move.create("a8");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
-        assertThat(move.getMove()).isEqualTo("a8");
+        assertThat(move.getSquare()).isEqualTo("a8");
         assertThat(move.getFile()).isEqualTo('a');
         assertThat(move.getRank()).isEqualTo('8');
     }
@@ -81,7 +80,7 @@ class MoveTest {
     public void shouldCreateAPawnTargetAtWhiteLowerBound() {
         Move move = Move.create("a2");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
-        assertThat(move.getMove()).isEqualTo("a2");
+        assertThat(move.getSquare()).isEqualTo("a2");
         assertThat(move.getFile()).isEqualTo('a');
         assertThat(move.getRank()).isEqualTo('2');
     }
@@ -90,7 +89,7 @@ class MoveTest {
     public void shouldCreateAPawnTargetAtBlackUpperBound() {
         Move move = Move.create("a1");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
-        assertThat(move.getMove()).isEqualTo("a1");
+        assertThat(move.getSquare()).isEqualTo("a1");
         assertThat(move.getFile()).isEqualTo('a');
         assertThat(move.getRank()).isEqualTo('1');
     }
@@ -99,7 +98,7 @@ class MoveTest {
     public void shouldCreateAPawnTargetAtBlackLowerBound() {
         Move move = Move.create("a7");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
-        assertThat(move.getMove()).isEqualTo("a7");
+        assertThat(move.getSquare()).isEqualTo("a7");
         assertThat(move.getFile()).isEqualTo('a');
         assertThat(move.getRank()).isEqualTo('7');
     }
@@ -108,7 +107,7 @@ class MoveTest {
     public void shouldCreateAPawnCaptureTarget() {
         Move move = Move.create("exd5");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
-        assertThat(move.getMove()).isEqualTo("exd5");
+        assertThat(move.getSquare()).isEqualTo("exd5");
         assertThat(move.getFile()).isEqualTo('d');
         assertThat(move.getRank()).isEqualTo('5');
     }
@@ -171,7 +170,7 @@ class MoveTest {
     public void shouldCreateAKingMove() {
         Move move = Move.create("Kf1");
         assertThat(move.getType()).isEqualTo(PieceType.KING);
-        assertThat(move.getMove()).isEqualTo("Kf1");
+        assertThat(move.getSquare()).isEqualTo("Kf1");
         assertThat(move.getFile()).isEqualTo('f');
         assertThat(move.getRank()).isEqualTo('1');
     }
@@ -202,8 +201,14 @@ class MoveTest {
     public void shouldCreateAKingCaptureMove() {
         Move move = Move.create("Kxf1");
         assertThat(move.getType()).isEqualTo(PieceType.KING);
-        assertThat(move.getMove()).isEqualTo("Kxf1");
+        assertThat(move.getSquare()).isEqualTo("Kxf1");
         assertThat(move.getFile()).isEqualTo('f');
         assertThat(move.getRank()).isEqualTo('1');
+    }
+
+    @Test
+    public void shouldReturnSimpleString() {
+        Move move = Move.create("Kxf1");
+        assertThat(move.toSimpleString()).isEqualTo("f1");
     }
 }

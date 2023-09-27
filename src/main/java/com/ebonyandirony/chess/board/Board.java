@@ -22,6 +22,10 @@ public class Board {
 
     private final Map<String, Long> squareBitboards = new HashMap<>();
 
+    public static Board create() {
+        return new Board();
+    }
+
     enum Pieces {
         WHITE_PAWNS,
         WHITE_ROOKS,
@@ -57,7 +61,7 @@ public class Board {
         // @formatter:on
 
         generateAllSquares().forEach(squareName -> {
-            long bitboard = calculateBitboard(squareName);
+            final long bitboard = calculateBitboard(squareName);
             squareBitboards.put(squareName, bitboard);
         });
     }
@@ -148,13 +152,13 @@ public class Board {
         return allWhitePieces() | allBlackPieces();
     }
 
-    long allWhitePieces() {
+    public long allWhitePieces() {
         return pieceBitboards.get(WHITE_PAWNS) | pieceBitboards.get(WHITE_ROOKS)
                 | pieceBitboards.get(WHITE_KNIGHTS) | pieceBitboards.get(WHITE_BISHOPS)
                 | pieceBitboards.get(WHITE_QUEEN) | pieceBitboards.get(WHITE_KING);
     }
 
-    long allBlackPieces() {
+    public long allBlackPieces() {
         return pieceBitboards.get(BLACK_PAWNS) | pieceBitboards.get(BLACK_ROOKS)
                 | pieceBitboards.get(BLACK_KNIGHTS) | pieceBitboards.get(BLACK_BISHOPS)
                 | pieceBitboards.get(BLACK_QUEEN) | pieceBitboards.get(BLACK_KING);
@@ -184,16 +188,23 @@ public class Board {
      * - 1L << ... shifts the binary digit '1' left by the calculated linear index,
      * creating a bitboard with a single '1' at the square's position.
      *
-     * @param squareName The square name in the format "a1" to "h8."
+     * @param square The square name in the format "a1" to "h8."
      * @return The bitboard value representing the square.
      */
-    private static long calculateBitboard(String squareName) {
+    public static long calculateBitboard(String square) {
         // Calculate the file index (0 to 7) based on the file character ('a' to 'h')
-        int fileIndex = squareName.charAt(0) - FILE_LOWER_BOUND;
+        int fileIndex = square.charAt(0) - FILE_LOWER_BOUND;
 
         // Calculate the rank index (0 to 7) based on the rank character ('1' to '8')
-        int rankIndex = squareName.charAt(1) - RANK_LOWER_BOUND;
+        int rankIndex = square.charAt(1) - RANK_LOWER_BOUND;
 
         return 1L << (fileIndex + rankIndex * 8);
+    }
+
+    public boolean isOccupied(String square) {
+        final long currentBoard = allBlackPieces() | allWhitePieces();
+        final long proposedBoard = calculateBitboard(square);
+
+        return (currentBoard & proposedBoard) != 0;
     }
 }

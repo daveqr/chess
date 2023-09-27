@@ -42,7 +42,7 @@ class BoardTest {
     @ParameterizedTest
     @MethodSource("bitboardTestData")
     public void shouldHaveBitboardsForAllSquares(String squareName, long expectedBitboard) {
-        Board board = BoardFactory.create();
+        Board board = create();
         assertThat(board.getSquareBitboard(squareName)).isEqualTo(expectedBitboard);
     }
 
@@ -50,98 +50,136 @@ class BoardTest {
     public void shouldCreateWhitePawnBitboard() {
 
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_11111111_00000000L;
-        assertThat(BoardFactory.create().getWhitePawnsBoard()).isEqualTo(expected);
+        assertThat(create().getWhitePawnsBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateWhiteRookBitboard() {
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_10000001L;
-        assertThat(BoardFactory.create().getWhiteRooksBoard()).isEqualTo(expected);
+        assertThat(create().getWhiteRooksBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateWhiteKnightBitboard() {
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_01000010L;
-        assertThat(BoardFactory.create().getWhiteKnightsBoard()).isEqualTo(expected);
+        assertThat(create().getWhiteKnightsBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateWhiteBishopBitboard() {
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00100100L;
-        assertThat(BoardFactory.create().getWhiteBishopsBoard()).isEqualTo(expected);
+        assertThat(create().getWhiteBishopsBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateWhiteQueenBitboard() {
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00001000L;
-        assertThat(BoardFactory.create().getWhiteQueenBoard()).isEqualTo(expected);
+        assertThat(create().getWhiteQueenBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateWhiteKingBitboard() {
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00010000L;
-        assertThat(BoardFactory.create().getWhiteKingBoard()).isEqualTo(expected);
+        assertThat(create().getWhiteKingBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackPawnBitboard() {
         long expected = 0b00000000_11111111_00000000_00000000_00000000_00000000_00000000_00000000L;
-        assertThat(BoardFactory.create().getBlackPawnsBoard()).isEqualTo(expected);
+        assertThat(create().getBlackPawnsBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackRookBitboard() {
         long expected = 0b10000001_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
-        assertThat(BoardFactory.create().getBlackRooksBoard()).isEqualTo(expected);
+        assertThat(create().getBlackRooksBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackKnightBitboard() {
         long expected = 0b01000010_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
-        assertThat(BoardFactory.create().getBlackKnightsBoard()).isEqualTo(expected);
+        assertThat(create().getBlackKnightsBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackBishopBitboard() {
         long expected = 0b00100100_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
-        assertThat(BoardFactory.create().getBlackBishopsBoard()).isEqualTo(expected);
+        assertThat(create().getBlackBishopsBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackQueenBitboard() {
         long expected = 0b00010000_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
-        assertThat(BoardFactory.create().getBlackQueenBoard()).isEqualTo(expected);
+        assertThat(create().getBlackQueenBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateBlackKingBitboard() {
         long expected = 0b00001000_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
-        assertThat(BoardFactory.create().getBlackKingBoard()).isEqualTo(expected);
+        assertThat(create().getBlackKingBoard()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateAllWhitePieces() {
         long expected = 0b00000000_00000000_00000000_00000000_00000000_00000000_11111111_11111111L;
-        assertThat(BoardFactory.create().allWhitePieces()).isEqualTo(expected);
+        assertThat(create().allWhitePieces()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateAllBlackPieces() {
         long expected = 0b11111111_11111111_00000000_00000000_00000000_00000000_00000000_00000000L;
-        assertThat(BoardFactory.create().allBlackPieces()).isEqualTo(expected);
+        assertThat(create().allBlackPieces()).isEqualTo(expected);
     }
 
     @Test
     public void shouldCreateAllPieces() {
         long expected = 0b11111111_11111111_00000000_00000000_00000000_00000000_11111111_11111111L;
-        assertThat(BoardFactory.create().allPieces()).isEqualTo(expected);
+        assertThat(create().allPieces()).isEqualTo(expected);
     }
 
-//    @Test
-//    public void shouldSetWhiteKingBoard() {
-//        long bitBoard = 0b00000000_00000000_00000000_00000000_00001000_00000000_00000000_00000000L;
-//        Board board = BoardFactory.create();
-//        board.setWhiteKingBoard(bitBoard);
-//        assertThat(Board.PIECE_BITBOARDS.get(PIECES.WHITE_KING)).isEqualTo(bitBoard);
-//    }
+    @ParameterizedTest
+    @MethodSource("occupiedSquareProvider")
+    public void shouldReturnTrueForOccupiedSquare(String square) {
+        Board board = Board.create();
+        assertThat(board.isOccupied(square))
+                .as("Square " + square + " should be occupied.")
+                .isTrue();
+    }
+
+    @ParameterizedTest
+    @MethodSource("unoccupiedSquareProvider")
+    public void shouldReturnFalseForUnoccupiedSquare(String square) {
+        Board board = Board.create();
+        assertThat(board.isOccupied(square))
+                .as("Square " + square + " should not be occupied.")
+                .isFalse();
+    }
+
+    private static Stream<String> occupiedSquareProvider() {
+        List<String> squares = new ArrayList<>();
+
+        for (char file = 'a'; file <= 'h'; file++) {
+            for (int rank = 1; rank <= 2; rank++) {
+                squares.add(String.format("%c%d", file, rank));
+            }
+
+            for (int rank = 8; rank >= 7; rank--) {
+                squares.add(String.format("%c%d", file, rank));
+            }
+        }
+
+        return squares.stream();
+    }
+
+    private static Stream<String> unoccupiedSquareProvider() {
+        List<String> squares = new ArrayList<>();
+
+        for (char file = 'a'; file <= 'h'; file++) {
+            for (int rank = 3; rank <= 6; rank++) {
+                squares.add(String.format("%c%d", file, rank));
+            }
+        }
+
+        return squares.stream();
+    }
 }

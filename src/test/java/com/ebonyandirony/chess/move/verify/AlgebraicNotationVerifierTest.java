@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class AlgebraicNotationVerifierTest {
 
     // Garry Kasparov vs Veselin Topalov
-    private static final String[] moves = {
+    private static final String[] GAME_MOVES = {
             "e4", "d6", "d4", "Nf6", "Nc3", "g6", "Be3", "Bg7", "Qd2", "c6", "f3", "b5",
             "Nge2", "Nbd7", "Bh6", "Bxh6", "Qxh6", "Bb7", "a3", "e5", "O-O-O", "Qe7",
             "Kb1", "a6", "Nc1", "O-O-O", "Nb3", "exd4", "Rxd4", "c5", "Rd1", "Nb6",
@@ -23,7 +23,7 @@ class AlgebraicNotationVerifierTest {
     };
 
     private static Stream<String> movesProvider() {
-        return Arrays.stream(moves);
+        return Arrays.stream(GAME_MOVES);
     }
 
     @ParameterizedTest

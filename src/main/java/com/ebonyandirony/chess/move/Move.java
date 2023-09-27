@@ -4,6 +4,7 @@ import com.ebonyandirony.chess.move.verify.AlgebraicNotationVerifier;
 import com.ebonyandirony.chess.move.verify.NotationVerifier;
 import com.ebonyandirony.chess.piece.PieceType;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,21 +18,21 @@ public class Move {
 
     private final PieceType type;
 
-    private final String move;
+    private final String square;
 
     private final char file;
 
     private final char rank;
 
-    private Move(String move) {
-        assertMove(move);
-        verify(move);
+    private Move(String square) {
+        assertMove(square);
+        verify(square);
 
-        this.move = move;
-        this.rank = findRank(move);
-        this.file = findFile(move);
+        this.square = square;
+        this.rank = findRank(square);
+        this.file = findFile(square);
 
-        final char symbol = move.charAt(0);
+        final char symbol = square.charAt(0);
         final boolean isPawn = Character.isLowerCase(symbol) && symbol >= 'a' && symbol <= 'h';
 
         this.type = isPawn ? PAWN : PieceType.fromSymbol(symbol);
@@ -61,8 +62,8 @@ public class Move {
         return type;
     }
 
-    public String getMove() {
-        return move;
+    public String getSquare() {
+        return square;
     }
 
     public int getRank() {
@@ -120,5 +121,16 @@ public class Move {
         } else {
             return move.charAt(isRank ? move.length() - 2 : 1);
         }
+    }
+
+    public String toSimpleString() {
+        return file + Character.toString(rank);
+    }
+
+    @Override
+    public String toString() {
+        return "Move{" +
+                "square='" + square + '\'' +
+                '}';
     }
 }
