@@ -2,6 +2,7 @@ package com.ebonyandirony.chess.move;
 
 import com.ebonyandirony.chess.board.Board;
 import com.ebonyandirony.chess.injection.GuiceInjector;
+import com.ebonyandirony.chess.move.parser.NotationParser;
 import com.ebonyandirony.chess.piece.PieceType;
 import com.google.inject.Inject;
 import com.google.inject.Key;

@@ -1,15 +1,14 @@
 package com.ebonyandirony.chess.move;
 
-import org.junit.jupiter.api.Test;
+import com.ebonyandirony.chess.move.parser.AlgebraicNotationParser;
+import com.ebonyandirony.chess.move.parser.NotationParser;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AlgebraicNotationParserTest {
 

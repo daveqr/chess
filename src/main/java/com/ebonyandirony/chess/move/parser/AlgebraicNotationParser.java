@@ -1,4 +1,4 @@
-package com.ebonyandirony.chess.move;
+package com.ebonyandirony.chess.move.parser;
 
 public final class AlgebraicNotationParser implements NotationParser {
 
