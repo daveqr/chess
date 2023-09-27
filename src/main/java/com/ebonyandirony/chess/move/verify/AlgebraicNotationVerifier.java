@@ -1,11 +1,11 @@
-package com.ebonyandirony.chess.move.parser;
+package com.ebonyandirony.chess.move.verify;
 
-public final class AlgebraicNotationParser implements NotationParser {
+public final class AlgebraicNotationVerifier implements NotationVerifier {
 
-    public AlgebraicNotationParser() {
+    public AlgebraicNotationVerifier() {
     }
 
-    public boolean parses(final String move) {
+    public boolean verify(final String move) {
         String queenSideCastleRegex = "O-O-O";
         String chessMovePattern = "([KQRBN]?[a-h]?[1-8]?[x-]?[a-h][1-8](=[QRBN])?[+#]?)";
 

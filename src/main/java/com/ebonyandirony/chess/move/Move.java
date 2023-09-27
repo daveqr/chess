@@ -1,8 +1,7 @@
 package com.ebonyandirony.chess.move;
 
-import com.ebonyandirony.chess.board.Board;
 import com.ebonyandirony.chess.injection.GuiceInjector;
-import com.ebonyandirony.chess.move.parser.NotationParser;
+import com.ebonyandirony.chess.move.verify.NotationVerifier;
 import com.ebonyandirony.chess.piece.PieceType;
 import com.google.inject.Inject;
 import com.google.inject.Key;
@@ -11,11 +10,13 @@ import com.google.inject.name.Names;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.ebonyandirony.chess.board.Board.FILE_LOWER_BOUND;
+import static com.ebonyandirony.chess.board.Board.FILE_UPPER_BOUND;
 import static com.ebonyandirony.chess.piece.PieceType.PAWN;
 
 
 public class Move {
-    private final NotationParser notationParser;
+    private final NotationVerifier notationVerifier;
 
     private final PieceType type;
 
@@ -26,8 +27,8 @@ public class Move {
     private final char rank;
 
     @Inject
-    private Move(final NotationParser notationParser, String move) {
-        this.notationParser = notationParser;
+    private Move(final NotationVerifier notationVerifier, String move) {
+        this.notationVerifier = notationVerifier;
 
         assertMove(move);
         verify(move);
@@ -43,9 +44,9 @@ public class Move {
     }
 
     public static Move create(final String move) {
-        NotationParser notationParser = GuiceInjector.getInstance()
-                .getInstance(Key.get(NotationParser.class, Names.named("algebraic")));
-        return new Move(notationParser, move);
+        final NotationVerifier notationVerifier = GuiceInjector.getInstance()
+                .getInstance(Key.get(NotationVerifier.class, Names.named("algebraic")));
+        return new Move(notationVerifier, move);
     }
 
     private void assertMove(final String target) {
@@ -59,7 +60,7 @@ public class Move {
     }
 
     private void verify(final String move) {
-        if (!notationParser.parses(move)) {
+        if (!notationVerifier.verify(move)) {
             throw new IllegalArgumentException("Invalid move: " + move);
         }
     }
@@ -67,7 +68,6 @@ public class Move {
     public PieceType getType() {
         return type;
     }
-
 
     public String getMove() {
         return move;
@@ -102,7 +102,7 @@ public class Move {
     }
 
     private boolean isPawnMove(char firstChar) {
-        return firstChar >= Board.FILE_LOWER_BOUND && firstChar <= Board.FILE_UPPER_BOUND;
+        return firstChar >= FILE_LOWER_BOUND && firstChar <= FILE_UPPER_BOUND;
     }
 
     private boolean isNamedPieceMove(char firstChar) {

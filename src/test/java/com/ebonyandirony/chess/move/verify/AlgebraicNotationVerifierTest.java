@@ -1,7 +1,5 @@
-package com.ebonyandirony.chess.move;
+package com.ebonyandirony.chess.move.verify;
 
-import com.ebonyandirony.chess.move.parser.AlgebraicNotationParser;
-import com.ebonyandirony.chess.move.parser.NotationParser;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -10,7 +8,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class AlgebraicNotationParserTest {
+class AlgebraicNotationVerifierTest {
 
     // Garry Kasparov vs Veselin Topalov
     private static final String[] moves = {
@@ -30,9 +28,9 @@ class AlgebraicNotationParserTest {
 
     @ParameterizedTest
     @MethodSource("movesProvider")
-    public void shouldParseMoves(String move) {
-        NotationParser parser = new AlgebraicNotationParser();
-        assertThat(parser.parses(move)).isTrue();
+    public void shouldVerifyMoves(String move) {
+        NotationVerifier parser = new AlgebraicNotationVerifier();
+        assertThat(parser.verify(move)).isTrue();
     }
 }
 
