@@ -57,4 +57,13 @@ public enum PieceType {
     public char getBlackAsciiCharacter() {
         return blackAsciiCharacter;
     }
+
+    public static PieceType fromSymbol(char symbol) {
+        for (PieceType pieceType : values()) {
+            if (pieceType.getSymbol() == symbol) {
+                return pieceType;
+            }
+        }
+        throw new IllegalArgumentException("Invalid symbol: " + symbol);
+    }
 }

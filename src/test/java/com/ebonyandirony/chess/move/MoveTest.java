@@ -11,7 +11,7 @@ class MoveTest {
 
     @Test
     public void shouldCreateAQueenCheckmateTarget() {
-        Move move = new Move("Qh8#");
+        Move move = Move.create("Qh8#");
         assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
         assertThat(move.getMove()).isEqualTo("Qh8#");
         assertThat(move.getFile()).isEqualTo('h');
@@ -21,7 +21,7 @@ class MoveTest {
 
     @Test
     public void shouldCreateAQueenTarget() {
-        Move move = new Move("Qd5");
+        Move move = Move.create("Qd5");
         assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
         assertThat(move.getMove()).isEqualTo("Qd5");
         assertThat(move.getFile()).isEqualTo('d');
@@ -33,8 +33,8 @@ class MoveTest {
         String target = "Qi4";
 
         assertThatThrownBy(() -> {
-            new Move(target);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid Queen move: " + target);
+            Move.create(target);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: " + target);
     }
 
     @Test
@@ -42,17 +42,17 @@ class MoveTest {
         String target = "Qa0";
 
         assertThatThrownBy(() -> {
-            new Move(target);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid Queen move: " + target);
+            Move.create(target);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: " + target);
 
         assertThatThrownBy(() -> {
-            new Move("Qa9");
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid Queen move: Qa9");
+            Move.create("Qa9");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: Qa9");
     }
 
     @Test
     public void shouldCreateAQueenCaptureTarget() {
-        Move move = new Move("Qxe5");
+        Move move = Move.create("Qxe5");
         assertThat(move.getType()).isEqualTo(PieceType.QUEEN);
         assertThat(move.getMove()).isEqualTo("Qxe5");
         assertThat(move.getFile()).isEqualTo('e');
@@ -61,7 +61,7 @@ class MoveTest {
 
     @Test
     public void shouldCreateAPawnTarget() {
-        Move move = new Move("a4");
+        Move move = Move.create("a4");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a4");
         assertThat(move.getFile()).isEqualTo('a');
@@ -70,7 +70,7 @@ class MoveTest {
 
     @Test
     public void shouldCreateAPawnTargetAtWhiteUpperBound() {
-        Move move = new Move("a8");
+        Move move = Move.create("a8");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a8");
         assertThat(move.getFile()).isEqualTo('a');
@@ -79,7 +79,7 @@ class MoveTest {
 
     @Test
     public void shouldCreateAPawnTargetAtWhiteLowerBound() {
-        Move move = new Move("a2");
+        Move move = Move.create("a2");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a2");
         assertThat(move.getFile()).isEqualTo('a');
@@ -88,7 +88,7 @@ class MoveTest {
 
     @Test
     public void shouldCreateAPawnTargetAtBlackUpperBound() {
-        Move move = new Move("a1");
+        Move move = Move.create("a1");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a1");
         assertThat(move.getFile()).isEqualTo('a');
@@ -97,7 +97,7 @@ class MoveTest {
 
     @Test
     public void shouldCreateAPawnTargetAtBlackLowerBound() {
-        Move move = new Move("a7");
+        Move move = Move.create("a7");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("a7");
         assertThat(move.getFile()).isEqualTo('a');
@@ -106,7 +106,7 @@ class MoveTest {
 
     @Test
     public void shouldCreateAPawnCaptureTarget() {
-        Move move = new Move("exd5");
+        Move move = Move.create("exd5");
         assertThat(move.getType()).isEqualTo(PieceType.PAWN);
         assertThat(move.getMove()).isEqualTo("exd5");
         assertThat(move.getFile()).isEqualTo('d');
@@ -118,8 +118,8 @@ class MoveTest {
         String target = "exx6";
 
         assertThatThrownBy(() -> {
-            new Move(target);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid pawn move: " + target);
+            Move.create(target);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: " + target);
     }
 
     @Test
@@ -127,8 +127,8 @@ class MoveTest {
         String target = "i4";
 
         assertThatThrownBy(() -> {
-            new Move(target);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid pawn move: " + target);
+            Move.create(target);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: " + target);
     }
 
     @Test
@@ -136,12 +136,12 @@ class MoveTest {
         String target = "a0";
 
         assertThatThrownBy(() -> {
-            new Move(target);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid pawn move: " + target);
+            Move.create(target);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: " + target);
 
         assertThatThrownBy(() -> {
-            new Move("a9");
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid pawn move: a9");
+            Move.create("a9");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: a9");
     }
 
     @Test
@@ -149,27 +149,27 @@ class MoveTest {
         String target = "Z1";
 
         assertThatThrownBy(() -> {
-            new Move(target);
+            Move.create(target);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: Z1");
     }
 
     @Test
     public void shouldThrowExceptionForNullTarget() {
         assertThatThrownBy(() -> {
-            new Move(null);
+            Move.create(null);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Move cannot be null.");
     }
 
     @Test
     public void shouldThrowExceptionForEmptyTarget() {
         assertThatThrownBy(() -> {
-            new Move(" ");
+            Move.create(" ");
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Move cannot be empty.");
     }
 
     @Test
     public void shouldCreateAKingMove() {
-        Move move = new Move("Kf1");
+        Move move = Move.create("Kf1");
         assertThat(move.getType()).isEqualTo(PieceType.KING);
         assertThat(move.getMove()).isEqualTo("Kf1");
         assertThat(move.getFile()).isEqualTo('f');
@@ -181,12 +181,12 @@ class MoveTest {
         String target = "Ka0";
 
         assertThatThrownBy(() -> {
-            new Move(target);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid King move: " + target);
+            Move.create(target);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: " + target);
 
         assertThatThrownBy(() -> {
-            new Move("Ka9");
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid King move: Ka9");
+            Move.create("Ka9");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: Ka9");
     }
 
     @Test
@@ -194,13 +194,13 @@ class MoveTest {
         String target = "Ki1";
 
         assertThatThrownBy(() -> {
-            new Move(target);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid King move: " + target);
+            Move.create(target);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Invalid move: " + target);
     }
 
     @Test
     public void shouldCreateAKingCaptureMove() {
-        Move move = new Move("Kxf1");
+        Move move = Move.create("Kxf1");
         assertThat(move.getType()).isEqualTo(PieceType.KING);
         assertThat(move.getMove()).isEqualTo("Kxf1");
         assertThat(move.getFile()).isEqualTo('f');

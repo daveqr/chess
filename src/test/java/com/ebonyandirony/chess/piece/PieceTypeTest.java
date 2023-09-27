@@ -3,6 +3,8 @@ package com.ebonyandirony.chess.piece;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PieceTypeTest {
 
@@ -46,5 +48,25 @@ class PieceTypeTest {
         assertThat(PieceType.PAWN.getSymbol()).isEqualTo('p');
         assertThat(PieceType.PAWN.getLabel()).isEqualTo("pawn");
         assertThat(PieceType.PAWN.getBlackAsciiCharacter()).isEqualTo('♟');
+    }
+
+    @Test
+    public void shouldFindExpectedSymbol() {
+        char[] symbols = {'p' , 'K' , 'Q' , 'B' , 'R' , 'N'};
+        PieceType[] expectedTypes = {PieceType.PAWN, PieceType.KING, PieceType.QUEEN, PieceType.BISHOP, PieceType.ROOK, PieceType.KNIGHT};
+
+        for (int i = 0; i < symbols.length; i++) {
+            PieceType result = PieceType.fromSymbol(symbols[i]);
+            assertEquals(expectedTypes[i], result, "Expected type does not match for symbol " + symbols[i]);
+        }
+    }
+
+    @Test
+    public void shouldThrowExceptionForUnexpectedSymbols() {
+        char[] invalidSymbols = {'a' , 'C' , 'X' , 'z' , '1' , '?'};
+
+        for (char symbol : invalidSymbols) {
+            assertThrows(IllegalArgumentException.class, () -> PieceType.fromSymbol(symbol));
+        }
     }
 }
