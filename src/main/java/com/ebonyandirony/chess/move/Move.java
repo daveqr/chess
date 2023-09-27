@@ -1,11 +1,9 @@
 package com.ebonyandirony.chess.move;
 
-import com.ebonyandirony.chess.injection.GuiceInjector;
+import com.ebonyandirony.chess.move.verify.AlgebraicNotationVerifier;
 import com.ebonyandirony.chess.move.verify.NotationVerifier;
 import com.ebonyandirony.chess.piece.PieceType;
 import com.google.inject.Inject;
-import com.google.inject.Key;
-import com.google.inject.name.Names;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,7 +14,7 @@ import static com.ebonyandirony.chess.piece.PieceType.PAWN;
 
 
 public class Move {
-    private final NotationVerifier notationVerifier;
+    private final NotationVerifier notationVerifier = new AlgebraicNotationVerifier();
 
     private final PieceType type;
 
@@ -27,9 +25,7 @@ public class Move {
     private final char rank;
 
     @Inject
-    private Move(final NotationVerifier notationVerifier, String move) {
-        this.notationVerifier = notationVerifier;
-
+    private Move(String move) {
         assertMove(move);
         verify(move);
 
@@ -44,9 +40,7 @@ public class Move {
     }
 
     public static Move create(final String move) {
-        final NotationVerifier notationVerifier = GuiceInjector.getInstance()
-                .getInstance(Key.get(NotationVerifier.class, Names.named("algebraic")));
-        return new Move(notationVerifier, move);
+        return new Move(move);
     }
 
     private void assertMove(final String target) {
