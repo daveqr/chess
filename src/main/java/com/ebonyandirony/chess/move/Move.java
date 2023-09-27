@@ -3,7 +3,6 @@ package com.ebonyandirony.chess.move;
 import com.ebonyandirony.chess.move.verify.AlgebraicNotationVerifier;
 import com.ebonyandirony.chess.move.verify.NotationVerifier;
 import com.ebonyandirony.chess.piece.PieceType;
-import com.google.inject.Inject;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,7 +23,6 @@ public class Move {
 
     private final char rank;
 
-    @Inject
     private Move(String move) {
         assertMove(move);
         verify(move);
