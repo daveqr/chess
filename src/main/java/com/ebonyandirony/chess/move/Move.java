@@ -82,7 +82,8 @@ public class Move {
     }
 
     private int findRank(String move) {
-        char rank = findRankOrFile(move, true);
+        final char rank = findRankOrFile(move, true);
+
         return Character.getNumericValue(rank);
     }
 
@@ -107,27 +108,33 @@ public class Move {
     }
 
     private boolean isNamedPieceMove(char firstChar) {
-        Set<Character> namedPieceSymbols = PieceType.getNamedPieces().stream()
+        final Set<Character> namedPieceSymbols = PieceType.getNamedPieces().stream()
                 .map(PieceType::getSymbol)
                 .collect(Collectors.toSet());
         return Character.isLetter(firstChar) && namedPieceSymbols.contains(firstChar);
     }
 
     private char extractFileOrRankForPawnMove(String move, boolean isRank) {
+        char targetChar;
+
         if (move.charAt(1) == 'x') {
-            return move.charAt(isRank ? move.length() - 1 : 2);
+            targetChar = move.charAt(isRank ? move.length() - 1 : 2);
         } else {
-            return move.charAt(isRank ? move.length() - 1 : 0);
+            targetChar = move.charAt(isRank ? move.length() - 1 : 0);
         }
+
+        return targetChar;
     }
 
     private char extractFileOrRankForNamedPieceMove(String move, boolean isRank) {
-        if (move.length() == 3) {
-            return move.charAt(isRank ? move.length() - 1 : 1);
-        } else if (move.length() > 3 && move.charAt(1) == 'x') {
-            return move.charAt(isRank ? move.length() - 1 : 2);
+        int length = move.length();
+
+        if (length == 3) {
+            return move.charAt(isRank ? length - 1 : 1);
+        } else if (length > 3 && move.charAt(1) == 'x') {
+            return move.charAt(isRank ? length - 1 : 2);
         } else {
-            return move.charAt(isRank ? move.length() - 2 : 1);
+            return move.charAt(isRank ? length - 2 : 1);
         }
     }
 
