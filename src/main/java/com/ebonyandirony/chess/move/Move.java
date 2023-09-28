@@ -18,24 +18,24 @@ public class Move {
 
     private final PieceType type;
 
-    private final String target;
+    private final String move;
 
     private final char file;
 
-    private final char rank;
+    private final int rank;
 
     private final Color color;
 
-    private Move(String target, Color color) {
-        assertMove(target);
-        verify(target);
+    private Move(String move, Color color) {
+        assertMove(move);
+        verify(move);
 
-        this.target = target;
-        this.rank = findRank(target);
-        this.file = findFile(target);
+        this.move = move;
+        this.rank = findRank(move);
+        this.file = findFile(move);
         this.color = color;
 
-        final char symbol = target.charAt(0);
+        final char symbol = move.charAt(0);
         final boolean isPawn = Character.isLowerCase(symbol) && symbol >= 'a' && symbol <= 'h';
 
         this.type = isPawn ? PAWN : PieceType.fromSymbol(symbol);
@@ -65,8 +65,8 @@ public class Move {
         return type;
     }
 
-    public String getTarget() {
-        return target;
+    public String getMove() {
+        return move;
     }
 
     public int getRank() {
@@ -81,8 +81,9 @@ public class Move {
         return color == Color.WHITE;
     }
 
-    private char findRank(String move) {
-        return findRankOrFile(move, true);
+    private int findRank(String move) {
+        char rank = findRankOrFile(move, true);
+        return Character.getNumericValue(rank);
     }
 
     private char findFile(String move) {
@@ -131,13 +132,13 @@ public class Move {
     }
 
     public String toSimpleString() {
-        return file + Character.toString(rank);
+        return file + Integer.toString(rank);
     }
 
     @Override
     public String toString() {
         return "Move{" +
-                "square='" + target + '\'' +
+                "square='" + move + '\'' +
                 '}';
     }
 }
