@@ -98,10 +98,6 @@ public class Board {
         return pieceBitboards.get(BLACK_QUEEN);
     }
 
-    public void setBlackKingBoard(long board) {
-        pieceBitboards.put(BLACK_KING, board);
-    }
-
     public long getBlackKingBoard() {
         return pieceBitboards.get(BLACK_KING);
     }
@@ -125,28 +121,6 @@ public class Board {
     public long getWhiteQueenBoard() {
         return pieceBitboards.get(WHITE_QUEEN);
     }
-
-//    public boolean isPathBlocked(String sourceSquare, String destinationSquare) {
-//        long occupancy = allPieces();
-//
-//        // 0b00000000_00000000_00000000_00000000_00000000_00000000_00001000_00000000L
-//        long sourceBit = BITBOARDS.get(sourceSquare);
-//        long destinationBit = BITBOARDS.get(destinationSquare);
-//
-//        // e2: 7 is 'e' - 'a', 4 is '1' - '1', and 2 is 2
-//        int squareIndex = 7 - 4 + (2 * 8);
-//        long fileMask = 0x0101010101010101L << squareIndex % 8;
-//        long rankMask = 0xFFL << (8 * (squareIndex / 8));
-////        Long.numberOfTrailingZeros()
-//
-//        return false;
-//    }
-
-//    private long generateSquaresBetween(long sourceBit, long destinationBit) {
-//        long fileMask = (1L << Long.numberOfTrailingZeros(sourceBit % 256)) - 1L;
-//        long rankMask = (1L << (Long.numberOfTrailingZeros(sourceBit / 256))) - 1L;
-//        return (fileMask & rankMask) & (sourceBit ^ destinationBit);
-//    }
 
     long allPieces() {
         return allWhitePieces() | allBlackPieces();
@@ -192,11 +166,8 @@ public class Board {
      * @return The bitboard value representing the square.
      */
     public static long calculateBitboard(String square) {
-        // Calculate the file index (0 to 7) based on the file character ('a' to 'h')
-        int fileIndex = square.charAt(0) - FILE_LOWER_BOUND;
-
-        // Calculate the rank index (0 to 7) based on the rank character ('1' to '8')
-        int rankIndex = square.charAt(1) - RANK_LOWER_BOUND;
+        final int fileIndex = square.charAt(0) - FILE_LOWER_BOUND;
+        final int rankIndex = square.charAt(1) - RANK_LOWER_BOUND;
 
         return 1L << (fileIndex + rankIndex * 8);
     }
