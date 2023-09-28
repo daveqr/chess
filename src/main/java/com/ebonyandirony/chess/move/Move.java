@@ -36,7 +36,8 @@ public class Move {
         this.color = color;
 
         final char symbol = move.charAt(0);
-        final boolean isPawn = Character.isLowerCase(symbol) && symbol >= 'a' && symbol <= 'h';
+        final boolean isPawn = Character.isLowerCase(symbol) &&
+                symbol >= FILE_LOWER_BOUND && symbol <= FILE_UPPER_BOUND;
 
         this.type = isPawn ? PAWN : PieceType.fromSymbol(symbol);
     }
