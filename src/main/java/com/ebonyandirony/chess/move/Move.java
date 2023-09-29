@@ -4,6 +4,8 @@ import com.ebonyandirony.chess.move.verify.AlgebraicNotationVerifier;
 import com.ebonyandirony.chess.move.verify.NotationVerifier;
 import com.ebonyandirony.chess.piece.Color;
 import com.ebonyandirony.chess.piece.PieceType;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,21 +14,26 @@ import static com.ebonyandirony.chess.board.Board.FILE_LOWER_BOUND;
 import static com.ebonyandirony.chess.board.Board.FILE_UPPER_BOUND;
 import static com.ebonyandirony.chess.piece.PieceType.PAWN;
 
-
 public class Move {
     private final NotationVerifier notationVerifier = new AlgebraicNotationVerifier();
 
+    @Getter
     private final PieceType type;
 
+    @Getter
+    @ToString.Include
     private final String move;
 
+    @Getter
     private final char file;
 
+    @Getter
     private final int rank;
 
+    @ToString.Include
     private final Color color;
 
-    private Move(String move, Color color) {
+    private Move(final String move, final Color color) {
         assertMove(move);
         verify(move);
 
@@ -60,22 +67,6 @@ public class Move {
         if (!notationVerifier.verify(move)) {
             throw new IllegalArgumentException("Invalid move: " + move);
         }
-    }
-
-    public PieceType getType() {
-        return type;
-    }
-
-    public String getMove() {
-        return move;
-    }
-
-    public int getRank() {
-        return rank;
-    }
-
-    public int getFile() {
-        return file;
     }
 
     public boolean isWhiteMove() {
@@ -141,12 +132,5 @@ public class Move {
 
     public String toSimpleString() {
         return file + Integer.toString(rank);
-    }
-
-    @Override
-    public String toString() {
-        return "Move{" +
-                "square='" + move + '\'' +
-                '}';
     }
 }

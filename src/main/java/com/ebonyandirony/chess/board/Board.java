@@ -39,7 +39,7 @@ public class Board {
         BLACK_KING
     }
 
-    Board() {
+    private Board() {
         // @formatter:off
         // A1 == LSB
         // H8 == MSB

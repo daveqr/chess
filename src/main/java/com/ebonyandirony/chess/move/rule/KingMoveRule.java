@@ -9,7 +9,7 @@ public final class KingMoveRule implements MoveRule {
 
     private final Move move;
 
-    KingMoveRule(final Board board, final Move move) {
+    public KingMoveRule(final Board board, final Move move) {
 
         // TODO verify this is a King move
 

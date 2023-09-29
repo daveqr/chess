@@ -1,5 +1,6 @@
 package com.ebonyandirony.chess.piece;
 
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
@@ -10,11 +11,9 @@ class PieceFactoryTest {
 
     @Test
     public void shouldCreatePawn() {
-        var pawn = PieceFactory.createPawn();
+        val pawn = PieceFactory.createPawn();
         assertThat(pawn.type()).isEqualTo(PieceType.PAWN);
         assertThat(pawn.movement()).isEqualTo(Set.of(Movement.VERTICAL_FORWARD_ONE));
-
-        //        Set.of(VERTICAL_FORWARD_ONE), Capture.DIAGONAL);
     }
 
 }

@@ -1,8 +1,9 @@
 plugins {
     id 'java'
+    id "io.freefair.lombok" version "8.3"
 }
 
-group = 'org.example'
+group = 'com.ebonyandirony'
 version = '1.0-SNAPSHOT'
 
 repositories {
