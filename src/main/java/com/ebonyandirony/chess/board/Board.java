@@ -1,9 +1,9 @@
 package com.ebonyandirony.chess.board;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 
@@ -64,11 +64,11 @@ public class Board {
         });
     }
 
-    public long getSquareBitboard(String square) {
+    public long getSquareBitboard(final String square) {
         return squareBitboards.get(square);
     }
 
-    public void setWhiteKingBoard(long board) {
+    public void setWhiteKingBoard(final long board) {
         pieceBitboards.put(Pieces.WHITE_KING, board);
     }
 
@@ -137,13 +137,15 @@ public class Board {
     }
 
     private static Stream<String> generateAllSquares() {
-        // @formatter:off
-        return IntStream.rangeClosed(FILE_LOWER_BOUND, FILE_UPPER_BOUND).mapToObj(
-                file -> IntStream.rangeClosed(RANK_LOWER_BOUND, RANK_UPPER_BOUND).mapToObj(
-                        rank -> String.format("%c%c", file, rank)
-                )
-        ).flatMap(Function.identity());
-        // @formatter:on
+        final List<String> squares = new ArrayList<>();
+
+        for (char file = 'a'; file <= 'h'; file++) {
+            for (char rank = '1'; rank <= '8'; rank++) {
+                squares.add(String.format("%c%c", file, rank));
+            }
+        }
+
+        return squares.stream();
     }
 
     /**

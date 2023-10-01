@@ -6,13 +6,13 @@ import java.util.Set;
 public enum PieceType {
 
 
-    PAWN('p' , "pawn", '♙' , '♟'),
-    KING('K' , "King", '♔' , '♚'),
-    QUEEN('Q' , "Queen", '♕' , '♛'),
-    BISHOP('B' , "Bishop", '♗' ,
+    PAWN('p', "pawn", '♙', '♟'),
+    KING('K', "King", '♔', '♚'),
+    QUEEN('Q', "Queen", '♕', '♛'),
+    BISHOP('B', "Bishop", '♗',
             '♝'),
-    ROOK('R' , "Rook", '♖' , '♜'),
-    KNIGHT('N' , "Knight", '♘' , '♞');
+    ROOK('R', "Rook", '♖', '♜'),
+    KNIGHT('N', "Knight", '♘', '♞');
 
 
     private final char symbol;

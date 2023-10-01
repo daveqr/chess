@@ -73,17 +73,17 @@ public class Move {
         return color == Color.WHITE;
     }
 
-    private int findRank(String move) {
+    private int findRank(final String move) {
         final char rank = findRankOrFile(move, true);
 
         return Character.getNumericValue(rank);
     }
 
-    private char findFile(String move) {
+    private char findFile(final String move) {
         return findRankOrFile(move, false);
     }
 
-    private char findRankOrFile(String move, boolean isRank) {
+    private char findRankOrFile(final String move, boolean isRank) {
         char firstChar = move.charAt(0);
 
         if (isPawnMove(firstChar)) {
@@ -95,18 +95,18 @@ public class Move {
         }
     }
 
-    private boolean isPawnMove(char firstChar) {
+    private boolean isPawnMove(final char firstChar) {
         return firstChar >= FILE_LOWER_BOUND && firstChar <= FILE_UPPER_BOUND;
     }
 
-    private boolean isNamedPieceMove(char firstChar) {
+    private boolean isNamedPieceMove(final char firstChar) {
         final Set<Character> namedPieceSymbols = PieceType.getNamedPieces().stream()
                 .map(PieceType::getSymbol)
                 .collect(Collectors.toSet());
         return Character.isLetter(firstChar) && namedPieceSymbols.contains(firstChar);
     }
 
-    private char extractFileOrRankForPawnMove(String move, boolean isRank) {
+    private char extractFileOrRankForPawnMove(final String move, final boolean isRank) {
         char targetChar;
 
         if (move.charAt(1) == 'x') {

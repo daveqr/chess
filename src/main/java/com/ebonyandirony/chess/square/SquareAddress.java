@@ -1,8 +1,10 @@
 package com.ebonyandirony.chess.square;
 
 import com.ebonyandirony.chess.board.Board;
+import lombok.Getter;
 
-public class SquareAddress {
+@Getter
+public final class SquareAddress {
 
     private final int file;
     private final int rank;
@@ -36,15 +38,4 @@ public class SquareAddress {
         throw new IllegalArgumentException("Invalid square label: " + square);
     }
 
-    public int getFile() {
-        return file;
-    }
-
-    public int getRank() {
-        return rank;
-    }
-
-    public String getSquare() {
-        return square;
-    }
 }

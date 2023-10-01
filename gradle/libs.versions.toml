@@ -1,0 +1,11 @@
+[versions]
+assertj = "3.24.2"
+mockito = "3.+"
+junit-jupiter = "5.9.2"
+
+[libraries]
+mocktio-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+junit-bom-core = { module = "org.junit:junit-bom", version.ref = "junit-jupiter" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
